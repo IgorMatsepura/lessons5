@@ -8,18 +8,20 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, VCFinalDelegate {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    @IBAction func btnPerformSeguePressed(_ sender: Any) {
+        performSegue(withIdentifier: "VCInitialToVCFinal", sender: nil)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? VCFinal {
+            destination.delegate = self
+        }
     }
-
-
+    func finishPassing(string: String) {
+        print("Notified")
+        print(string)
+    }
 }
 
